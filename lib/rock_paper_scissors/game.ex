@@ -8,7 +8,6 @@ defmodule RockPaperScissors.Game do
   def shoot(game, player, choice) do
     game
     |> update_game_with_choice(player, choice)
-    |> check_for_winner
   end
 
   def update_game_with_choice(game, player, choice) do

@@ -11,7 +11,7 @@ defmodule RockPaperScissors.Application do
       # Start the Ecto repository
       supervisor(RockPaperScissors.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(RockPaperScissorsWeb.Endpoint, []),
+      supervisor(RockPaperScissorsWeb.Endpoint, [])
       # Start your own worker by calling: RockPaperScissors.Worker.start_link(arg1, arg2, arg3)
       # worker(RockPaperScissors.Worker, [arg1, arg2, arg3]),
     ]
