@@ -1,9 +1,10 @@
 defmodule RockPaperScissors do
-  @moduledoc """
-  RockPaperScissors keeps the contexts that define your domain
-  and business logic.
+  def new_game() do
+    {:ok, pid} = RockPaperScissors.GameSupervisor.start_game()
+    pid
+  end
 
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
-  """
+  def shoot(game_pid, player, choice) do
+    GenServer.call(game_pid, {:shoot, player, choice})
+  end
 end

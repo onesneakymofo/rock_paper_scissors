@@ -1,4 +1,4 @@
-defmodule RockPaperScissors.Server do
+defmodule RockPaperScissors.GameServer do
   use GenServer
 
   alias RockPaperScissors.Game
