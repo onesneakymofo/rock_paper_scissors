@@ -6,7 +6,7 @@ defmodule RockPaperScissors.Game do
   end
 
   def join(game, player) do
-    new_players = Map.put(game.players, Map.count(game.players), player)
+    new_players = Map.put(game.players, Enum.count(game.players), player)
     %{game | players: new_players}
   end
 

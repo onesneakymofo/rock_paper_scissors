@@ -15,4 +15,9 @@ defmodule RockPaperScissors.GameServer do
     game = Game.shoot(game, player, choice)
     {:reply, game, game}
   end
+
+  def handle_call({:join, player}, _from, game) do
+    game = Game.join(game, player)
+    {:reply, game, game}
+  end
 end
