@@ -12,18 +12,26 @@ defmodule RockPaperScissors.Game do
     %{game | players: new_players}
   end
 
-  def shoot(game, shooter, choice) do
+  def shoot(game, player, choice) do
+    game
+    |> update_choices(player, choice)
+    |> update_scores
+    |> assign_winner_if_score_reached
+    |> reset_if_winner
+  end
+
+  def update_choices(game, player, choice) do
     new_players =
       game.players
-      |> Enum.map(&add_choice(&1, shooter, choice))
+      |> Enum.map(&add_choice(&1, player, choice))
 
     %{game | players: new_players}
   end
 
-  def add_choice(player, shooter, choice) do
-    case shooter.name == player.name do
-      true -> %Player{player | choice: choice}
-      false -> player
+  def add_choice(selected_player, choosing_player, choice) do
+    case choosing_player.name == selected_player.name do
+      true -> %Player{selected_player | choice: choice}
+      false -> selected_player
     end
   end
 
@@ -31,12 +39,12 @@ defmodule RockPaperScissors.Game do
     game |> Judge.tally()
   end
 
-  def declare_winner(game) do
+  def assign_winner_if_score_reached(game) do
     game
     |> Judge.declare_winner()
-    |> reset_choices
   end
 
-  def reset_choices(game) do
+  def reset_if_winner(game) do
+    game
   end
 end
