@@ -11,20 +11,18 @@ defmodule RockPaperScissors.Game do
   end
 
   def shoot(game, player, choice) do
-    players_choice = %{player | choice: choice}
   end
 
   def update_scores(game) do
-    game |> Judge.tally
+    game |> Judge.tally()
   end
 
   def declare_winner(game) do
     game
-      |> Judge.declare_winner
-      |> reset_choices
+    |> Judge.declare_winner()
+    |> reset_choices
   end
 
-  def reset_choices(game)
-
+  def reset_choices(game) do
   end
 end
