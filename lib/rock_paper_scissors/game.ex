@@ -1,20 +1,30 @@
 defmodule RockPaperScissors.Game do
-  defstruct choices: %{}, winner: nil
+  defstruct players: %{}, winner: nil
 
   def new() do
-    %RockPaperScissors.Game{choices: [], winner: nil}
+    %RockPaperScissors.Game{players: %{}, winner: nil}
+  end
+
+  def join(game, player) do
+    new_players = Map.put(game.players, Map.count(game.players), player)
+    %{game | players: new_players}
   end
 
   def shoot(game, player, choice) do
+    players_choice = %{player | choice: choice}
+  end
+
+  def update_scores(game) do
+    game |> Judge.tally
+  end
+
+  def declare_winner(game) do
     game
-    |> update_game_with_choice(player, choice)
+      |> Judge.declare_winner
+      |> reset_choices
   end
 
-  def update_game_with_choice(game, player, choice) do
-    new_choices = [%{player: player, choice: choice} | game.choices]
-    %{game | choices: new_choices}
-  end
+  def reset_choices(game)
 
-  def check_for_winner(game) do
   end
 end
