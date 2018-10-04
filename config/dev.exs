@@ -57,8 +57,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :rock_paper_scissors, RockPaperScissors.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "cautwell",
+  password: "meatloaf",
   database: "rock_paper_scissors_dev",
   hostname: "localhost",
   pool_size: 10
