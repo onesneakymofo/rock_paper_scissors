@@ -1,11 +1,11 @@
 defmodule RockPaperScissors.Player do
-  @enforce_keys [:name]
+  @enforce_keys [:name, :score]
   defstruct [:name, :choice, :score]
 
   alias RockPaperScissors.Player
 
   def new(name) do
-    %Player{name: name}
+    %Player{name: name, score: 0}
   end
 
   def update_choices(game, player, choice) do

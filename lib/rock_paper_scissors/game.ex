@@ -4,7 +4,7 @@ defmodule RockPaperScissors.Game do
   alias RockPaperScissors.{Player, Judge}
 
   def new() do
-    %RockPaperScissors.Game{players: [], winner: nil}
+    %RockPaperScissors.Game{players: [], winners: []]}
   end
 
   def join(game, player) do

@@ -1,34 +1,24 @@
 defmodule RockPaperScissors.Judge do
   alias RockPaperScissors.{Player}
 
-  def tally([player, others]) do
-    others
-    |> Enum.each(&evaluate_choice(player, &1))
+  @winners %{"rock" => "scissors", "paper" => "rock", "scissors" => "paper"}
 
-    tally(others)
+  def score(players) do
+    total = total_choice_count(players)
+
+    players
+    |> Enum.map(&tally(&1, total))
   end
 
-  def tally([]), do: nil
-
-  def evaluate_choice(player1 = %Player{choice: "rock"}, player2 = %Player{choice: "scissors"}) do
+  def tally(%Player{choice: choice, score: score} = player, total) do
+    %{player | score: score + total[@winners[choice]]}
   end
 
-  def evaluate_choice(player1 = %Player{choice: "scissors"}, player2 = %Player{choice: "paper"}) do
-  end
-
-  def evaluate_choice(player1 = %Player{choice: "paper"}, player2 = %Player{choice: "rock"}) do
-  end
-
-  def evaluate_choice(player1 = %Player{choice: "scissors"}, player2 = %Player{choice: "rock"}) do
-  end
-
-  def evaluate_choice(player1 = %Player{choice: "paper"}, player2 = %Player{choice: "scissors"}) do
-  end
-
-  def evaluate_choice(player1 = %Player{choice: "rock"}, player2 = %Player{choice: "paper"}) do
-  end
-
-  def evaluate_choice(player1 = %Player{choice: nil}, player2 = %Player{choice: nil}) do
+  def total_choice_count(players) do
+    players
+    |> Enum.group_by(& &1.choice)
+    |> Enum.map(fn {k, v} -> {k, Enum.count(v)} end)
+    |> Enum.into(%{})
   end
 
   def find_winner(game) do
