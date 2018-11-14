@@ -5,7 +5,7 @@ defmodule RockPaperScissors.Player do
   alias RockPaperScissors.Player
 
   def new(name) do
-    %Player{name: name, score: 0}
+    %Player{name: name, score: 0, choice: nil}
   end
 
   def update_choices(game, player, choice) do
@@ -14,10 +14,6 @@ defmodule RockPaperScissors.Player do
       |> Enum.map(&add_choice(&1, player, choice))
 
     %{game | players: new_players}
-  end
-
-  def update_score(player) do
-    %Player{player | score: player.score + 1}
   end
 
   defp add_choice(selected_player, choosing_player, choice) do
